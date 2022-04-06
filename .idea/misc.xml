@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/activity_main.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/new_note.xml" value="0.1953125" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/note_previews.xml" value="0.1" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Notepad/app/src/main/res/layout/show_note.xml" value="0.2" />
       </map>
     </option>

@@ -31,7 +31,8 @@ class NewNote : DialogFragment(){
                   .show()
                    dismiss()
             }else
-                Toast.makeText(callingClass,resources.getString(R.string.note_empty),Toast.LENGTH_SHORT)
+                Toast.makeText(callingClass,resources.getString(R.string.note_empty),Toast.LENGTH_LONG)
+                    .show()
         }
         return builder.create()
     }
