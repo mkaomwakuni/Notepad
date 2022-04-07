@@ -3,7 +3,7 @@
     <SwitchPreferenceCompat
         app:key="theme"
         app:defaultValue="false"
-        app:title="@string/action_settings" />
+        app:title="@string/Dark_mode" />
     <SwitchPreferenceCompat
     app:key="dividingLines"
     app:defaultValue="false"

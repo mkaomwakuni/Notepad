@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ok"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_marginStart="200dp"/>
+                android:layout_marginStart="20dp"/>
         </TableRow>
 
     </LinearLayout>

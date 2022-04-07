@@ -35,9 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.toolbar)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
 
         adapter = NoteAdapter(this)
         binding.recylerView.layoutManager= LinearLayoutManager(applicationContext)

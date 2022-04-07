@@ -32,8 +32,8 @@ class NoteAdapter(private val mainActivity:
         val note = noteList[position]
         holder.NTitle.text = note.title
         holder.NContents.text = if
-                (note.contents.length < 25)
-                    note.contents else note.contents.substring(0, 25) + "..."
+                (note.contents.length < 1)
+                    note.contents else note.contents.substring(0, 15) + "..."
     }
     override fun getItemCount(): Int = noteList.size
 }
