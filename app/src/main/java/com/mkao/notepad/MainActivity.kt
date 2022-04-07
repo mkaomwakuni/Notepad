@@ -2,11 +2,16 @@ package com.mkao.notepad
 
 import NoteAdapter
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -21,10 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         private lateinit var binding: ActivityMainBinding
         private lateinit var adapter: NoteAdapter
+        private lateinit var sharedPreferences: SharedPreferences
         //companion object converts user notes into json and save them internally in the app
         companion object{
             private const val FILEPATH ="notes.json"
         }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +44,28 @@ class MainActivity : AppCompatActivity() {
         binding.recylerView.itemAnimator= DefaultItemAnimator()
         binding.recylerView.adapter= adapter
 
-        binding.fab.setOnClickListener { view ->
-        NewNote().show(supportFragmentManager,"")
+        binding.fab.setOnClickListener {
+            NewNote().show(supportFragmentManager,"")
         }
 
         adapter.noteList=retriveNotes()
         adapter.notifyItemRangeInserted(0,adapter.noteList.size)
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val nightThemeSelected = sharedPreferences.getBoolean("theme",false)
+        if (nightThemeSelected)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        val showDividinglines = sharedPreferences.getBoolean("dividingLines",false)
+        if (showDividinglines)
+            binding.recylerView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+        else if (binding.recylerView.itemDecorationCount>0)
+            binding.recylerView.removeItemDecorationAt(0)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,7 +79,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings ->{
+                val intent = Intent(this,SettingsActivity::class.java)
+                startActivity(intent)
+                true}
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -86,6 +112,8 @@ class MainActivity : AppCompatActivity() {
             writer?.close()
         }
     }
+
+
     private fun retriveNotes():MutableList<Note>{
         var notelist = mutableListOf<Note>()
         if (this.getFileStreamPath(FILEPATH).isFile){
@@ -109,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         return notelist
     }
 
+
     fun deleteNote(index: Int) {
         adapter.noteList.removeAt(index)
         adapter.notifyItemRemoved(index)
@@ -116,8 +145,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun showNote(layoutPosition: Int) {
         val dialog =ShowNote(adapter.noteList[layoutPosition], layoutPosition )
+        dialog.show(supportFragmentManager,"")
 
     }
 }

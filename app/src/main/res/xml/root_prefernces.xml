@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
     <SwitchPreferenceCompat
         app:key="theme"
         app:defaultValue="false"
@@ -8,4 +8,4 @@
     app:key="dividingLines"
     app:defaultValue="false"
     app:title="@string/Divider" />
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>
